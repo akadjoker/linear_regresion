@@ -340,6 +340,15 @@ Avalia a precisão do modelo usando várias métricas e gera visualizações par
 
 A regressão linear com gradiente descendente é um algoritmo fundamental em machine learning. Embora existam métodos analíticos mais eficientes para resolver regressão linear simples (como a equação normal), o gradiente descendente é valioso porque pode ser estendido para problemas mais complexos, como regressão logística e redes neurais.
 
+##  Overfitting 
+    Overfitting acontece quando um modelo ajusta se demais aos dados do treinamento, capturando não apenas a tendência geral, mas também o ruído ou as      peculiaridades específicas daqueles dados. Como resultado:
+    O modelo tem excelente desempenho nos dados de treinamento (pode até prever valores exatamente iguais)
+    Mas tem um mau desempenho em novos dados nunca vistos antes.
+
+    É como se o modelo "decorasse" os dados de treinamento em vez de aprender a relação subjacente.
+    No caso da regressão linear simples, o overfitting é menos comum porque o modelo é relativamente simples (apenas uma linha reta). Mas em modelos mais complexos (como polinômios de ordem superior ou redes neurais), o overfitting é um problema frequente.
+    O meu modelo mostra sinais de um modelo bem ajustado - ele captura a tendência geral entre quilometragem e preço, mas ainda tem alguns erros residuais, o que é totalmente esperado e saudável para este modelo de aprendizagem.
+
 ## Variações do Gradiente Descendente
     Batch Gradient Descent: Usa todas as amostras para calcular o gradiente.
     Stochastic Gradient Descent (SGD): Atualiza os parâmetros a cada amostra.

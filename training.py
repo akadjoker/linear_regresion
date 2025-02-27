@@ -50,7 +50,7 @@ def linear_regression(mileage, price, learning_rate=0.1,  epochs=1000):
     theta1 = 0
     
     # Histórico para visualização
-    theta_history = []
+
     cost_history = []
     
     for _ in range(epochs):
@@ -69,12 +69,15 @@ def linear_regression(mileage, price, learning_rate=0.1,  epochs=1000):
         # valores de theta
         theta0 -= learning_rate * (1/m) * tmp_theta0
         theta1 -= learning_rate * (1/m) * tmp_theta1
+        # Nota:  calculando os valores  tmp_theta0 e tmp_theta1 usando os valores atuais de theta0 e theta1, 
+        # e só depois atualiza ambos os parâmetros. Isso garante que o gradiente descendente funcione corretamente, 
+        # pois os gradientes são calculados com base no mesmo conjunto de parâmetros.
         
  
-        theta_history.append((theta0, theta1))
+      
         cost_history.append(compute_mse(mileage, price, theta0, theta1))
     
-    return theta0, theta1, theta_history, cost_history
+    return theta0, theta1, cost_history
 
  
 def save_model(theta0, theta1, km_min, km_max, price_min, price_max, file_path="model.txt"):
@@ -126,8 +129,8 @@ def main():
     iterations = 10000
     
  
-    print("Treinando o modelo...")
-    theta0, theta1, theta_history, cost_history = linear_regression(
+    print("Treinando o modelo... :D ")
+    theta0, theta1, cost_history = linear_regression(
         mileage_norm, price_norm, learning_rate, iterations
     )
     
@@ -144,7 +147,7 @@ def main():
  
     plot_cost_history(cost_history)
 
-    # Fazer algumas previsões para verificar o modelo
+    # só algumas previsões para testar o modelo
     sample_km = [50000, 100000, 150000, 200000]
     print("\nExemplos de previsões:")
     for km in sample_km:
@@ -154,7 +157,7 @@ def main():
         # Fazer a previsão
         price_norm_pred = estimate_price(km_norm, theta0, theta1)
         
-        # Desnormalizar para obter o preço real
+        # Desnorm para obter o preço real
         price_pred = denormalize_data(price_norm_pred, price_min, price_max)
         
         print(f"Quilometragem: {km} km => Preço previsto: {price_pred:.2f} €")

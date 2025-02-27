@@ -29,15 +29,15 @@ def main():
         theta0, theta1, km_min, km_max, price_min, price_max = load_model()
         print("Modelo carregado com sucesso!")
     except Exception as e:
-        print(f"Erro ao carregar o modelo: {e}")
-        print("Verifiqua  vque já treinaste o modelo executando o training.py ;) .")
+        print("0")
+        print("Já treinaste o bixo? executando o training.py ;) .")
         return
     
  
     while True:
         try:
  
-            km_input = input("\Chuta os KM do carro (ou 'q' para sair): ")
+            km_input = input("Chuta os KM do carro (ou 'q' para sair): ")
             
             if km_input.lower() == 'q':
                 break
@@ -47,7 +47,7 @@ def main():
             # Verificar se o valor está dentro do intervalo usado no treinamento
             if mileage < km_min or mileage > km_max:
                 print(f"Atenção: A quilometragem {mileage} está fora do intervalo de treinamento ({km_min} - {km_max}).")
-                print("A previsão pode não ser precisa.")
+                print("A previsão pode não ser precisa :( .")
             
  
             price = estimate_price(mileage, theta0, theta1, km_min, km_max, price_min, price_max)
@@ -61,6 +61,6 @@ def main():
             print(f"Ocorreu um erro: {e}")
 
 if __name__ == "__main__":
-    print("Programa de Previsão de Preço de Carros")
+    print("Previsão de Preço de Carros")
     print("=======================================")
     main()
