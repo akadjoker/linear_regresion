@@ -126,12 +126,12 @@ def main():
     
     #   hiperparâmetros
     learning_rate = 0.01
-    iterations = 10000
+    epochs = 10000
     
  
     print("Treinando o modelo... :D ")
     theta0, theta1, cost_history = linear_regression(
-        mileage_norm, price_norm, learning_rate, iterations
+        mileage_norm, price_norm, learning_rate, epochs
     )
     
  
@@ -140,7 +140,7 @@ def main():
     
  
     save_model(theta0, theta1, km_min, km_max, price_min, price_max)
-    print(f"Modelo salvo com sucesso! Parâmetros: theta0={theta0}, theta1={theta1}")
+    print(f"Modelo guardado com sucesso! Parâmetros: theta0={theta0}, theta1={theta1}")
  
     plot_data_and_regression(mileage_norm, price_norm, theta0, theta1, normalized=True)
     

@@ -24,13 +24,12 @@ def load_model(file_path="model.txt"):
     return theta0, theta1, km_min, km_max, price_min, price_max
 
 def main():
-    # Carregar os parâmetros do modelo
     try:
         theta0, theta1, km_min, km_max, price_min, price_max = load_model()
         print("Modelo carregado com sucesso!")
     except Exception as e:
         print("0")
-        print("Já treinaste o bixo? executando o training.py ;) .")
+        print("Já treinaste o bixo? correndo o training.py ;) .")
         return
     
  
@@ -56,7 +55,7 @@ def main():
             print(f"Preço estimado para um carro com {mileage} km: {price:.2f} €")
             
         except ValueError:
-            print("Erro: Por favori, informa um valor numérico válido :) .")
+            print("Erro: Ei, informa um valor numérico válido :) .")
         except Exception as e:
             print(f"Ocorreu um erro: {e}")
 

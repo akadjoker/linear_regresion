@@ -39,36 +39,8 @@ def compute_mse(mileage, price, theta0, theta1):
     
     return total_error / m
 
-def train_with_validation(mileage, price, learning_rate=0.1, epochs=1000, val_split=0.2):
-    """
-    Treina o modelo com validação e retorna o histórico de custos
-    para treinamento e validação.
-    
-    Parameters:
-    -----------
-    mileage : array
-        Array de quilometragens 
-    price : array
-        Array de preços
-    learning_rate : float
-        Taxa de aprendizado
-    epochs : int
-        Número de épocas de treinamento
-    val_split : float
-        Proporção de dados a ser usada para validação (0 a 1)
-    
-    Returns:
-    --------
-    theta0 : float
-        Parâmetro theta0 final
-    theta1 : float
-        Parâmetro theta1 final
-    train_history : list
-        Histórico de custos no conjunto de treinamento
-    val_history : list
-        Histórico de custos no conjunto de validação
-    """
-    # Embaralhar os dados
+def train_with_validation(mileage, price, learning_rate=0.1, epochs=1000, val_split=0.2):#20% dos dados sao para teste
+    # baralhar os dados
     indices = np.arange(len(mileage))
     np.random.shuffle(indices)
     mileage = mileage[indices]
@@ -90,7 +62,7 @@ def train_with_validation(mileage, price, learning_rate=0.1, epochs=1000, val_sp
     val_history = []
     
     for epoch in range(epochs):
-        # Calcular os gradientes no conjunto de treinamento
+        # Calcular os gradientes no conjunto de treino
         tmp_theta0 = 0
         tmp_theta1 = 0
         
@@ -115,25 +87,13 @@ def train_with_validation(mileage, price, learning_rate=0.1, epochs=1000, val_sp
     return theta0, theta1, train_history, val_history
 
 def plot_train_val_history(train_history, val_history, save_path=None):
-    """
-    Plota o histórico de custos de treinamento e validação.
-    
-    Parameters:
-    -----------
-    train_history : list
-        Histórico de custos no conjunto de treinamento
-    val_history : list
-        Histórico de custos no conjunto de validação
-    save_path : str, optional
-        Caminho para salvar o gráfico
-    """
     plt.figure(figsize=(12, 6))
     epochs = range(1, len(train_history) + 1)
     
-    plt.plot(epochs, train_history, 'b-', label='Custo de Treinamento')
+    plt.plot(epochs, train_history, 'b-', label='Custo de treino')
     plt.plot(epochs, val_history, 'r-', label='Custo de Validação')
     
-    plt.title('Histórico de Custo (MSE) durante o Treinamento')
+    plt.title('Histórico de Custo (MSE) durante o treino')
     plt.xlabel('Épocas')
     plt.ylabel('Erro Quadrático Médio (MSE)')
     plt.legend()
@@ -155,25 +115,8 @@ def plot_train_val_history(train_history, val_history, save_path=None):
     plt.show()
 
 def plot_train_val_data_with_model(mileage, price, val_split=0.2, theta0=None, theta1=None, save_path=None):
-    """
-    Plota os dados de treino e validação junto com a linha de regressão.
-    
-    Parameters:
-    -----------
-    mileage : array
-        Array de quilometragens
-    price : array
-        Array de preços
-    val_split : float
-        Proporção de dados usada para validação
-    theta0 : float, optional
-        Parâmetro theta0 do modelo
-    theta1 : float, optional
-        Parâmetro theta1 do modelo
-    save_path : str, optional
-        Caminho para salvar o gráfico
-    """
-    # Embaralhar os dados
+
+    # baralha os dados
     indices = np.arange(len(mileage))
     np.random.shuffle(indices)
     mileage_shuffled = mileage[indices]
@@ -211,7 +154,7 @@ def plot_train_val_data_with_model(mileage, price, val_split=0.2, theta0=None, t
 def main():
     file_path = "data.csv"
     
-    # Carregar e normalizar os dados
+
     mileage, price = load_data(file_path)
     mileage_norm, km_min, km_max = normalize_data(mileage)
     price_norm, price_min, price_max = normalize_data(price)
@@ -219,47 +162,30 @@ def main():
     # Hiperparâmetros
     learning_rate = 0.01
     epochs = 1000
-    validation_split = 0.2
+    validation_split = 0.2 # 20% dos dados  para teste
     
     print("Treinando o modelo com validação...")
     theta0, theta1, train_history, val_history = train_with_validation(
         mileage_norm, price_norm, learning_rate, epochs, validation_split
     )
     
-    print(f"Treinamento concluído! Parâmetros: theta0={theta0}, theta1={theta1}")
+    print(f"treino concluído! Parâmetros: theta0={theta0}, theta1={theta1}")
     
-    # Plotar histórico de treino e validação
+
     plot_train_val_history(train_history, val_history, "train_val_history.png")
-    
-    # Plotar dados e modelo
+
     plot_train_val_data_with_model(
         mileage_norm, price_norm, validation_split, theta0, theta1, "train_val_data.png"
     )
     
-    # Adicionar visualização de dados não normalizados com o modelo
-    # Precisamos converter theta0 e theta1 para a escala original
-    
-    # Fórmula para preço original: 
-    # price = price_norm * (price_max - price_min) + price_min
-    # price_norm = theta0 + theta1 * mileage_norm
-    # mileage_norm = (mileage - km_min) / (km_max - km_min)
-    
-    # Substituindo:
-    # price = (theta0 + theta1 * (mileage - km_min) / (km_max - km_min)) * (price_max - price_min) + price_min
-    # price = theta0 * (price_max - price_min) + price_min + theta1 * (mileage - km_min) / (km_max - km_min) * (price_max - price_min)
-    # price = (theta0 * (price_max - price_min) + price_min) + (theta1 * (price_max - price_min) / (km_max - km_min)) * (mileage - km_min)
-    # price = (theta0 * (price_max - price_min) + price_min) + (theta1 * (price_max - price_min) / (km_max - km_min)) * mileage - (theta1 * (price_max - price_min) / (km_max - km_min)) * km_min
-    
-    # Então, no espaço original:
-    # original_theta0 = (theta0 * (price_max - price_min) + price_min) - (theta1 * (price_max - price_min) / (km_max - km_min)) * km_min
-    # original_theta1 = theta1 * (price_max - price_min) / (km_max - km_min)
+
     
     original_theta1 = theta1 * (price_max - price_min) / (km_max - km_min)
     original_theta0 = (theta0 * (price_max - price_min) + price_min) - original_theta1 * km_min
     
     print(f"Parâmetros na escala original: theta0={original_theta0}, theta1={original_theta1}")
     
-    # Plotar dados originais e modelo
+
     plt.figure(figsize=(12, 6))
     plt.scatter(mileage, price, c='blue', alpha=0.6, label='Dados Originais')
     

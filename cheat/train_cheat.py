@@ -65,7 +65,7 @@ def main():
     with open('sklearn_model.pkl', 'wb') as f:
         pickle.dump(params, f)
     
-    print("Modelo sklearn salvo com sucesso em 'sklearn_model.pkl'")
+    print("Modelo sklearn guardado com sucesso em 'sklearn_model.pkl'")
     
  
     plt.figure(figsize=(10, 6))

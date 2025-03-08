@@ -27,7 +27,7 @@ def main():
         
         while True:
        
-            km_input = input("\nInforme a quilometragem do carro (ou 'q' para sair): ")
+            km_input = input("\nInforma a quilometragem do carro (ou 'q' para sair): ")
             
             if km_input.lower() == 'q':
                 break
@@ -37,7 +37,7 @@ def main():
                 
         
                 if mileage < params['X_min'] or mileage > params['X_max']:
-                    print(f"Atenção: A quilometragem {mileage} está fora do intervalo de treinamento ({params['X_min']} - {params['X_max']}).")
+                    print(f"Atenção: A quilometragem {mileage} está fora do intervalo de treino ({params['X_min']} - {params['X_max']}).")
                     print("A previsão pode não ser precisa :( .")
                 
  
@@ -51,7 +51,7 @@ def main():
                 
     except Exception as e:
         print(f"Erro: {e}")
-        print("Verifica ses já tens o bixo treinado usando train_sklearn.py.")
+        print("Verifica se já tens o bixo treinado usando train_sklearn.py.")
 
 if __name__ == "__main__":
     print("Programa de Previsão com scikit-learn")
