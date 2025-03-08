@@ -228,7 +228,7 @@ def plot_cost_history(cost_history):
     plt.plot(cost_history)
     plt.xlabel('Iterações')
     plt.ylabel('Custo (MSE)')
-    plt.title('Histórico de Custo durante o Treinamento')
+    plt.title('Histórico de Custo durante o treino')
     plt.grid(True)
     plt.savefig('cost_history.png')
     plt.show()
@@ -290,7 +290,7 @@ def plot_predictions_vs_actual(y_true, y_pred):
 
 2. **Número de Iterações**: Defeni 10.000 iterações, o que é suficiente para este conjunto de dados. Em conjuntos maiores ou mais complexos, poderia ser necessário aumentar este número.
 
-3. **Salvamento do Modelo**: Após o trenio, os parâmetros θ0, θ1 e os valores usados para normalização são salvos em um arquivo de texto simples, para serem usados posteriormente no programa de previsão.
+3. **Salvamento do Modelo**: Após o treino, os parâmetros θ0, θ1 e os valores usados para normalização são salvos em um arquivo de texto simples, para serem usados posteriormente no programa de previsão.
 
 ```python
 def save_model(theta0, theta1, km_min, km_max, price_min, price_max, file_path="model.txt"):
@@ -298,7 +298,7 @@ def save_model(theta0, theta1, km_min, km_max, price_min, price_max, file_path="
         f.write(f"{theta0}\n{theta1}\n{km_min}\n{km_max}\n{price_min}\n{price_max}")
 ```
 
-4. **Previsão com Novos Dados**: No programa de previsão, a quilometragem é normalizada usando os mesmos valores do trieno, e então a fórmula de previsão é aplicada. O resultado é desnormalizado para obter o preço em euros.
+4. **Previsão com Novos Dados**: No programa de previsão, a quilometragem é normalizada usando os mesmos valores do treino, e então a fórmula de previsão é aplicada. O resultado é desnormalizado para obter o preço em euros.
 
 ```python
 def estimate_price(mileage, theta0, theta1, km_min, km_max, price_min, price_max):
@@ -314,7 +314,7 @@ def estimate_price(mileage, theta0, theta1, km_min, km_max, price_min, price_max
     return price
 ```
 ##O que são Resíduos?
-A distribuição de resíduos é uma ferramenta fundamental para avaliar a qualidade de um modelo de regressão. Vou explicar o que são resíduos, como analisá-los e por que essa análise é crucial. Resíduos são as diferenças entre os valores observados (reais) e os valores previstos pelo modelo: resíduo = valor_real - valor_previsto
+A distribuição de resíduos é uma ferramenta fundamental para avaliar a qualidade de um modelo de regressão. O que são resíduos, como analisá-los e por que essa análise é crucial. Resíduos são as diferenças entre os valores observados (reais) e os valores previstos pelo modelo: resíduo = valor_real - valor_previsto
 
 No contexto do projeto de previsão de preços de carros com base na quilometragem:
 
@@ -327,11 +327,11 @@ Análise da Distribuição de Resíduos
 
 ## Conjuntos de Programas Desenvolvidos
 
-### 1. training.py - Programa de Treinamento
+### 1. training.py - Programa de treino
 Carrega os dados, treina o modelo usando gradiente descendente e salva os parâmetros.
 
 ### 2. predict.py - Programa de Previsão
-Carrega os parâmetros treinados e permite ao usuário inserir uma quilometragem para obter uma previsão de preço.
+Carrega os parâmetros treinados e permite ao utilizador inserir uma quilometragem para obter uma previsão de preço.
 
 ### 3. evaluate.py - Programa de Avaliação
 Avalia a precisão do modelo usando várias métricas e gera visualizações para análise.
@@ -341,11 +341,11 @@ Avalia a precisão do modelo usando várias métricas e gera visualizações par
 A regressão linear com gradiente descendente é um algoritmo fundamental em machine learning. Embora existam métodos analíticos mais eficientes para resolver regressão linear simples (como a equação normal), o gradiente descendente é valioso porque pode ser estendido para problemas mais complexos, como regressão logística e redes neurais.
 
 ##  Overfitting 
-    Overfitting acontece quando um modelo ajusta se demais aos dados do treinamento, capturando não apenas a tendência geral, mas também o ruído ou as      peculiaridades específicas daqueles dados. Como resultado:
-    O modelo tem excelente desempenho nos dados de treinamento (pode até prever valores exatamente iguais)
+    Overfitting acontece quando um modelo ajusta se demais aos dados do treino, capturando não apenas a tendência geral, mas também o ruído ou as      peculiaridades específicas daqueles dados. Como resultado:
+    O modelo tem excelente desempenho nos dados de treino (pode até prever valores exatamente iguais)
     Mas tem um mau desempenho em novos dados nunca vistos antes.
 
-    É como se o modelo "decorasse" os dados de treinamento em vez de aprender a relação subjacente.
+    É como se o modelo "decorasse" os dados de treino em vez de aprender a relação subjacente.
     No caso da regressão linear simples, o overfitting é menos comum porque o modelo é relativamente simples (apenas uma linha reta). Mas em modelos mais complexos (como polinômios de ordem superior ou redes neurais), o overfitting é um problema frequente.
     O meu modelo mostra sinais de um modelo bem ajustado - ele captura a tendência geral entre quilometragem e preço, mas ainda tem alguns erros residuais, o que é totalmente esperado e saudável para este modelo de aprendizagem.
 
@@ -359,4 +359,8 @@ https://stanford.edu/~shervine/teaching/cs-229/
 https://mml-book.github.io/
 https://didatica.tech/gradiente-descendente-e-regressao-linear/
 https://medium.com/@bruno.dorneles/regress%C3%A3o-linear-com-gradiente-descendente-d3420b0b0ff
+https://www.deeplearningbook.com.br/
+https://www.coursera.org/learn/machine-learning :RECOMENDO pela math
+https://www.coursera.org/learn/machine-learning-duke
+https://www.coursera.org/learn/machine-learning-with-python
 

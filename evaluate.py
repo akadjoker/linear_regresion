@@ -79,7 +79,8 @@ def main():
     file_path = "data.csv"
     
     try:
- 
+        print("Programa de Avaliação de Precisão do Modelo")
+        print("==========================================")
         theta0, theta1, km_min, km_max, price_min, price_max = load_model()
         print("Modelo carregado com sucesso!")
         
@@ -112,6 +113,4 @@ def main():
         print("Executa primeiro o programa training.py.")
 
 if __name__ == "__main__":
-    print("Programa de Avaliação de Precisão do Modelo")
-    print("==========================================")
     main()

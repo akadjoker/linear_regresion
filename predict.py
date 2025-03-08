@@ -2,7 +2,7 @@ def estimate_price(mileage, theta0, theta1, km_min, km_max, price_min, price_max
     # Normalizar o mileage
     mileage_norm = (mileage - km_min) / (km_max - km_min)
     
-    # Fazer a previsão normalizada
+    # previsão normalizada
     price_norm = theta0 + (theta1 * mileage_norm)
     
     # Desnormalizar o preço
@@ -44,9 +44,9 @@ def main():
             
             mileage = float(km_input)
             
-            # Verificar se o valor está dentro do intervalo usado no treinamento
+            # Verifica se o valor está dentro do intervalo usado no treino
             if mileage < km_min or mileage > km_max:
-                print(f"Atenção: A quilometragem {mileage} está fora do intervalo de treinamento ({km_min} - {km_max}).")
+                print(f"Atenção: A quilometragem {mileage} está fora do intervalo de treino ({km_min} - {km_max}).")
                 print("A previsão pode não ser precisa :( .")
             
  

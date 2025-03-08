@@ -70,7 +70,7 @@ def linear_regression(mileage, price, learning_rate=0.1,  epochs=1000):
         theta0 -= learning_rate * (1/m) * tmp_theta0
         theta1 -= learning_rate * (1/m) * tmp_theta1
         # Nota:  calculando os valores  tmp_theta0 e tmp_theta1 usando os valores atuais de theta0 e theta1, 
-        # e só depois atualiza ambos os parâmetros. Isso garante que o gradiente descendente funcione corretamente, 
+        # e só depois atualiza ambos os parâmetros. Isso garante que o gradiente descendente funciona bem, 
         # pois os gradientes são calculados com base no mesmo conjunto de parâmetros.
         
  
@@ -108,7 +108,7 @@ def plot_cost_history(cost_history):
     plt.plot(cost_history)
     plt.xlabel('Iterações')
     plt.ylabel('Custo (MSE)')
-    plt.title('Histórico de Custo durante o Treinamento')
+    plt.title('Histórico de Custo durante o Treino')
     plt.grid(True)
     plt.savefig('cost_history.png')
     #plt.show()
